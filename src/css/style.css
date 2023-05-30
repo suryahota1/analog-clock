@@ -1,0 +1,129 @@
+:root {
+    --clock-size: 30vw;
+    --timer-width: 25px;
+    --clock-radius: calc((var(--clock-size) - var(--timer-width)) / 2);
+    font-size: 16px;
+}
+header, footer {
+    text-align: center;
+}
+.clock-face {
+    width: var(--clock-size);
+    height: var(--clock-size);
+    background-color: tomato;
+    border-radius: 50%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.clock-face time:nth-child(1) {
+    --rotation: 90deg
+}
+
+.clock-face time:nth-child(2) {
+    --rotation: 60deg
+}
+
+.clock-face time:nth-child(3) {
+    --rotation: 30deg
+}
+
+.clock-face time:nth-child(4) {
+    --rotation: 0deg
+}
+
+.clock-face time:nth-child(5) {
+    --rotation: 330deg
+}
+
+.clock-face time:nth-child(6) {
+    --rotation: 300deg
+}
+
+.clock-face time:nth-child(7) {
+    --rotation: 270deg
+}
+
+.clock-face time:nth-child(8) {
+    --rotation: 240deg
+}
+
+.clock-face time:nth-child(9) {
+    --rotation: 210deg
+}
+
+.clock-face time:nth-child(10) {
+    --rotation: 180deg
+}
+
+.clock-face time:nth-child(11) {
+    --rotation: 150deg
+}
+
+.clock-face time:nth-child(12) {
+    --rotation: 120deg
+}
+
+.clock-face time {
+    position: absolute;
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #fff;
+    left: calc(var(--clock-radius) + (var(--clock-radius) * cos(var(--rotation))));
+    top: calc(var(--clock-radius) - (var(--clock-radius) * sin(var(--rotation))));
+    width: var(--timer-width);
+    height: var(--timer-width);
+    display: grid;
+    place-content: center;
+}
+
+.clock-face .center {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: #000;
+    left: calc(var(--clock-size) / 2 - 2.5px);
+    top: calc(var(--clock-size) / 2 - 2.5px);
+}
+
+@keyframes turn {
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+.clock-face .arm {
+    position: absolute;
+    transform: rotate(-90deg);
+    transform-origin: left;
+    width: var(--arm_width);
+    height: var(--arm_height);
+    background-color: var(--arm_color);
+    left: calc(var(--clock-size) / 2 - 2.5px);
+    top: calc(var(--clock-size) / 2 - 2.5px);
+}
+
+.arm.seconds {
+    --arm_width: calc(var(--clock-size) / 2 - var(--timer-width));
+    --arm_height: 2px;
+    --arm_color: blue;
+    z-index: 3;
+    animation: turn 60s steps(60, end) infinite;
+}
+
+.arm.minutes {
+    --arm_width: calc(var(--clock-size) / 2 - var(--timer-width) - 35px);
+    --arm_height: 3px;
+    --arm_color: red;
+    z-index: 2;
+    animation: turn 3600s steps(60, end) infinite;
+}
+
+.arm.hours {
+    --arm_width: calc(var(--clock-size) / 2 - var(--timer-width) - 70px);
+    --arm_height: 4px;
+    --arm_color: green;
+    z-index: 1;
+    animation: turn 43200s linear infinite;
+}
